@@ -53,7 +53,7 @@ using namespace std;
 //     return 0;
 // }
 
-/*--------------------------------------------------------------------*/
+/*-----------------------shallow copy---------------------------------------------*/
 // class Student {
 // public:
 //     string name;
@@ -85,37 +85,68 @@ using namespace std;
 //     return 0;
 // }
 
-class Student {
-    public:
-        string name;
-        double* cgpaPtr;
+/*-----------------------deep copy------------------------------------------*/
+// class Student {
+//     public:
+//         string name;
+//         double* cgpaPtr;
     
-        Student(string name, double cgpa){
-            this->name = name;
-            cgpaPtr = new double;
-            *cgpaPtr = cgpa;
-        }
+//         Student(string name, double cgpa){
+//             this->name = name;
+//             cgpaPtr = new double;
+//             *cgpaPtr = cgpa;
+//         }
 
-        Student(Student &obj){
-            this->name = obj.name;
-            cgpaPtr = new double;
-            *cgpaPtr = *obj.cgpaPtr;
-        }
+//         Student(Student &obj){
+//             this->name = obj.name;
+//             cgpaPtr = new double;
+//             *cgpaPtr = *obj.cgpaPtr;
+//         }
     
-        void getInfo() {
-            cout <<"name: "<< name <<endl;
-            cout <<"cgpa: "<< *cgpaPtr <<endl; 
-        }
-    };
-    int main() {
-        Student s1("Abhishek Rai", 7.5);
-        Student s2(s1); //"SANAKAR SAHOO"
+//         void getInfo() {
+//             cout <<"name: "<< name <<endl;
+//             cout <<"cgpa: "<< *cgpaPtr <<endl; 
+//         }
+//     };
+//     int main() {
+//         Student s1("Abhishek Rai", 7.5);
+//         Student s2(s1); //"SANAKAR SAHOO"
 
-        s1.getInfo();
-        *(s2.cgpaPtr) = 8.5;
-        s1.getInfo();
+//         s1.getInfo();
+//         *(s2.cgpaPtr) = 8.5;
+//         s1.getInfo();
 
-        s2.name = "sanskar sahoo";
-        s2.getInfo();
-        return 0;
-    } 
+//         s2.name = "sanskar sahoo";
+//         s2.getInfo();
+//         return 0;
+//     } 
+
+/*---------------------Destructure------------------------------------*/
+class Student{
+public:
+    string name;
+    double* cgpaPtr;
+
+    Student(string name, double cgpa) {
+        this->name = name;
+        cgpaPtr = new double;
+        *cgpaPtr = cgpa;
+    }
+
+    ~Student(){
+        delete cgpaPtr;//free the allocated memory
+        cout <<"Hi,I delete everything\n";
+    }
+
+    void getInfo() {
+
+        cout<<"name: " << name << endl;
+        cout<<"cgpa: " << *cgpaPtr << endl;
+    }
+};
+
+int main(){
+    Student s1("abhishek rai", 8.6);
+    s1.getInfo();
+    return 0;
+}
